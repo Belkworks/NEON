@@ -177,7 +177,7 @@ class Neon
 		@_error 'platform not supported!' unless syn
 		
 		@_makeDirectories!
-		tag = 'github:safazi/flat/init.lua'
+		tag = 'github:safazi/flat[master]/init.lua'
 		flat = @github 'safazi', 'flat'
 
 		@manifest = with flat 'neon/manifest.json'

@@ -263,7 +263,7 @@ do
         self:_error('platform not supported!')
       end
       self:_makeDirectories()
-      local tag = 'github:safazi/flat/init.lua'
+      local tag = 'github:safazi/flat[master]/init.lua'
       local flat = self:github('safazi', 'flat')
       do
         local _with_0 = flat('neon/manifest.json')
