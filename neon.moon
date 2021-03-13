@@ -120,6 +120,9 @@ class Neon
 
 		defaults options, tag: "github:#{user}/#{repo}[#{branch}]/#{file}"
 
+		-- TODO: tag with last commit
+		-- url: https://api.github.com/repos/user/repo/commits
+
 		with 'https://raw.githubusercontent.com/%s/%s/%s/%s'
 			url = \format user, repo, branch, file
 			return @web url, options
@@ -189,5 +192,3 @@ class Neon
 singleton = Neon! -- debug: true
 getgenv!.NEON = singleton if getgenv
 singleton
-
--- https://api.github.com/repos/safazi/quick/commits
