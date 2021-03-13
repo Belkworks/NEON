@@ -7,6 +7,11 @@ defaults = (d, s) ->
 
 tohex = (s) -> s\gsub '.', (c) -> string.format '%02X', string.byte c
 
+-- 	Options:
+-- 		fresh: force redownload
+--		cache: write to file
+--		text: return text
+
 class Neon
 	new: (options = {}) =>
 		defaults options, debug: false
@@ -21,7 +26,7 @@ class Neon
 		print '[DEBUG]',...
 
 	_error: (message) =>
-		error message -- TODO: show onscreen
+		error message -- TODO: show onscreen?
 		return
 
 	_http: (url, options = {}) =>
@@ -68,8 +73,13 @@ class Neon
 		return @_error 'invalid tag passed to :_execute' unless 'string' == type options.tag
 		@_debug "loading #{options.tag}"
 
+		if options.cache
+			@_writefile code, options
+
+		if options.text
+			return code
+
 		chunk = @_loadstring code, options
-		@_writefile code, options if options.cache
 		@_executeChunk chunk, options
 
 	clearCache: (K) =>
@@ -135,24 +145,29 @@ class Neon
 		name = tohex syn.crypt.derive tag, 12
 		path = "neon/cache/#{name}.bin"
 		if isfile path
-			if bytecode = readfile path
-				@_debug "read #{tag} from file" -- TODO: update
-				return true, @_execute bytecode, :tag, cache: false
+			if code = readfile path
+				@_debug "read #{tag} from file"
+				options.cache = false
+				options.tag = tag
+				return true, @_execute code, options
 
 	_writefile: (code, options) =>
 		@_makeDirectories!
 
 		name = tohex syn.crypt.derive options.tag, 12
 		path = "neon/cache/#{name}.bin"
-		dump = dumpstring code
+
+		dump = if options.text
+			code
+		else dumpstring code
+
 		writefile path, dump
 		
 		if @packages
-			@packages\set options.tag, time: os.time!
+			@packages\set options.tag, os.time!
 			@manifest\write!
 
 		@_debug "wrote #{options.tag} to file as #{name}"
-		-- TODO: update manifest
 
 	init: =>
 		@_error 'platform not supported!' unless syn

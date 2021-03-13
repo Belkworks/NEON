@@ -103,10 +103,13 @@ do
         return self:_error('invalid tag passed to :_execute')
       end
       self:_debug("loading " .. tostring(options.tag))
-      local chunk = self:_loadstring(code, options)
       if options.cache then
         self:_writefile(code, options)
       end
+      if options.text then
+        return code
+      end
+      local chunk = self:_loadstring(code, options)
       return self:_executeChunk(chunk, options)
     end,
     clearCache = function(self, K)
@@ -228,13 +231,12 @@ do
       local path = "neon/cache/" .. tostring(name) .. ".bin"
       if isfile(path) then
         do
-          local bytecode = readfile(path)
-          if bytecode then
+          local code = readfile(path)
+          if code then
             self:_debug("read " .. tostring(tag) .. " from file")
-            return true, self:_execute(bytecode, {
-              tag = tag,
-              cache = false
-            })
+            options.cache = false
+            options.tag = tag
+            return true, self:_execute(code, options)
           end
         end
       end
@@ -243,12 +245,15 @@ do
       self:_makeDirectories()
       local name = tohex(syn.crypt.derive(options.tag, 12))
       local path = "neon/cache/" .. tostring(name) .. ".bin"
-      local dump = dumpstring(code)
+      local dump
+      if options.text then
+        dump = code
+      else
+        dump = dumpstring(code)
+      end
       writefile(path, dump)
       if self.packages then
-        self.packages:set(options.tag, {
-          time = os.time()
-        })
+        self.packages:set(options.tag, os.time())
         self.manifest:write()
       end
       return self:_debug("wrote " .. tostring(options.tag) .. " to file as " .. tostring(name))
