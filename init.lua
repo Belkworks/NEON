@@ -213,13 +213,13 @@ do
       end
       self:_makeDirectories()
       defaults(options, {
-        maxAge = 7 * 24 * 60 * 60
+        maxAge = 7 * 24 * 60
       })
       if self.packages then
         do
           local x = self.packages:get(tag)
           if x then
-            if os.time() - x.time > options.maxAge then
+            if os.time() - x.time > options.maxAge * 60 then
               return 
             end
           else
