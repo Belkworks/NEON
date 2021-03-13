@@ -10,8 +10,8 @@ if not isfile('neon/init.lua') then
 end
 pcall(loadfile('neon/init.lua'))
 ```
-
-## Loading from GitHub
+## API
+**Loading from GitHub**
 ```lua
 :github(author, repository, file = 'init.lua', branch = 'master', opts)
 ```
@@ -19,7 +19,7 @@ pcall(loadfile('neon/init.lua'))
 quick = NEON:github('belkworks', 'quick')
 ```
 
-## Loading from Pastebin
+**Loading from Pastebin**
 ```lua
 :pastebin(id, opts)
 ```
@@ -27,7 +27,7 @@ quick = NEON:github('belkworks', 'quick')
 package = NEON:pastebin('pastebin-id')
 ```
 
-## Loading from URL
+**Loading from URL**
 ```lua
 :web(url, opts)
 ```
