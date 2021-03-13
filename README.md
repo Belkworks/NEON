@@ -4,9 +4,10 @@
 ## Loader
 Here is a snippet to quickly download and run NEON.
 ```lua
-if not isfile('neon/init.lua') then
-    local f = 'https://raw.githubusercontent.com/%s/%s/master/init.lua'
-    writefile('neon/init.lua', game:HttpGet(f:format('belkworks', 'neon')))
+if not isfolder('neon')then makefolder('neon')end
+if not isfile('neon/init.lua')then
+    local raw = 'https://raw.githubusercontent.com/%s/%s/master/init.lua'
+    writefile('neon/init.lua',game:HttpGet(raw:format('belkworks','neon')))
 end
 pcall(loadfile('neon/init.lua'))
 ```
