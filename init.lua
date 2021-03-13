@@ -162,9 +162,12 @@ do
       })
       return self:web("https://pastebin.com/raw/" .. tostring(id), options)
     end,
-    github = function(self, user, repo, file, options)
+    github = function(self, user, repo, file, branch, options)
       if file == nil then
         file = 'init.lua'
+      end
+      if branch == nil then
+        branch = 'master'
       end
       if options == nil then
         options = { }
@@ -178,12 +181,15 @@ do
       if not ('string' == type(file)) then
         return self:_error('no file passed to :github')
       end
+      if not ('string' == type(branch)) then
+        return self:_error('no branch passed to :github')
+      end
       defaults(options, {
-        tag = "github:" .. tostring(user) .. "/" .. tostring(repo) .. "/" .. tostring(file)
+        tag = "github:" .. tostring(user) .. "/" .. tostring(repo) .. "[" .. tostring(branch) .. "]/" .. tostring(file)
       })
       do
-        local _with_0 = 'https://raw.githubusercontent.com/%s/%s/master/%s'
-        local url = _with_0:format(user, repo, file)
+        local _with_0 = 'https://raw.githubusercontent.com/%s/%s/%s/%s'
+        local url = _with_0:format(user, repo, branch, file)
         return self:web(url, options)
       end
     end,

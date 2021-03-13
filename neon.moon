@@ -101,14 +101,16 @@ class Neon
 		defaults options, tag: "pastebin:#{id}"
 		@web "https://pastebin.com/raw/#{id}", options
 
-	github: (user, repo, file = 'init.lua', options = {}) =>
+	github: (user, repo, file = 'init.lua', branch = 'master', options = {}) =>
 		return @_error 'no user passed to :github' unless 'string' == type user
 		return @_error 'no repo passed to :github' unless 'string' == type repo
 		return @_error 'no file passed to :github' unless 'string' == type file
+		return @_error 'no branch passed to :github' unless 'string' == type branch
 
-		defaults options, tag: "github:#{user}/#{repo}/#{file}"
-		with 'https://raw.githubusercontent.com/%s/%s/master/%s'
-			url = \format user, repo, file
+		defaults options, tag: "github:#{user}/#{repo}[#{branch}]/#{file}"
+
+		with 'https://raw.githubusercontent.com/%s/%s/%s/%s'
+			url = \format user, repo, branch, file
 			return @web url, options
 
 	_makeDirectories: =>
