@@ -307,7 +307,7 @@ do
   _base_0.__class = _class_0
   Neon = _class_0
 end
-local singleton = Neon
+local singleton = Neon()
 if getgenv then
   getgenv().NEON = singleton
 end

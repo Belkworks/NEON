@@ -186,7 +186,7 @@ class Neon
 
 	__call: (...) => @github ...
 
-singleton = Neon -- debug: true
+singleton = Neon! -- debug: true
 getgenv!.NEON = singleton if getgenv
 singleton
 
