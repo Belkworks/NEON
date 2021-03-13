@@ -34,3 +34,10 @@ package = NEON:pastebin('pastebin-id')
 ```lua
 package = NEON:web('http://path.to/the/file.lua')
 ```
+
+**Options**
+`opts` is a dictionary that changes how files are loaded.
+|Key|Type|Default|Description|
+|--|--|--|--|
+|`fresh`|Boolean|False|Force the resource to be redownloaded|
+|`cache`|Boolean|True|Save the resource to file
