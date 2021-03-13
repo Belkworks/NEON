@@ -11,6 +11,7 @@ tohex = (s) -> s\gsub '.', (c) -> string.format '%02X', string.byte c
 -- 		fresh: force redownload
 --		cache: write to file
 --		text: return text
+--		maxAge: max file age
 
 class Neon
 	new: (options = {}) =>
@@ -135,11 +136,11 @@ class Neon
 
 		@_makeDirectories!
 
-		defaults options, maxAge: 7 * 24 * 60 * 60
+		defaults options, maxAge: 7 * 24 * 60
 		
 		if @packages
 			if x = @packages\get tag
-				return if os.time! - x.time > options.maxAge
+				return if os.time! - x.time > options.maxAge*60
 			else return
 
 		name = tohex syn.crypt.derive tag, 12
