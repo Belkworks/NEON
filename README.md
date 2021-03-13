@@ -43,3 +43,4 @@ package = NEON:web('http://path.to/the/file.lua')
 |`fresh`|Boolean|False|Force the resource to be redownloaded|
 |`cache`|Boolean|True|Save the resource to file
 |`text`|Boolean|False|Return the raw text
+|`maxAge`|Number|7 Days|Maximum cached age (in minutes)
