@@ -36,6 +36,7 @@ package = NEON:web('http://path.to/the/file.lua')
 ```
 
 **Options**
+
 `opts` is a dictionary that changes how files are loaded.
 |Key|Type|Default|Description|
 |--|--|--|--|
