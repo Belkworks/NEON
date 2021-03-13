@@ -127,7 +127,7 @@ class Neon
 
 		defaults options, maxAge: 7 * 24 * 60 * 60
 		
-		if @packages and not options.force
+		if @packages
 			if x = @packages\get tag
 				return if os.time! - x.time > options.maxAge
 			else return

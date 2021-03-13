@@ -212,7 +212,7 @@ do
       defaults(options, {
         maxAge = 7 * 24 * 60 * 60
       })
-      if self.packages and not options.force then
+      if self.packages then
         do
           local x = self.packages:get(tag)
           if x then
