@@ -177,8 +177,8 @@ class Neon
 		@_error 'platform not supported!' unless syn
 		
 		@_makeDirectories!
-		tag = 'github:safazi/flat[master]/init.lua'
-		flat = @github 'safazi', 'flat'
+		tag = 'github:belkworks/flat[master]/init.lua'
+		flat = @github 'belkworks', 'flat'
 
 		@manifest = with flat 'neon/manifest.json'
 			@packages = \namespace 'packages'
