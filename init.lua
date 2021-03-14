@@ -113,13 +113,11 @@ do
       return self:_executeChunk(chunk, options)
     end,
     clearCache = function(self, K)
-      do
-        K = tostring(K)
-        if K then
-          self.cache[K] = nil
-        else
-          self.cache = { }
-        end
+      K = tostring(K)
+      if K then
+        self.cache[K] = nil
+      else
+        self.cache = { }
       end
     end,
     web = function(self, url, options)

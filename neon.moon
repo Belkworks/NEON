@@ -84,9 +84,10 @@ class Neon
 		@_executeChunk chunk, options
 
 	clearCache: (K) =>
-		if K = tostring K
-			@cache[K] = nil
-		else @cache = {}
+		K = tostring K
+        if K
+        	@cache[K] = nil
+        else @cache = { }
 
 	web: (url, options = {}) =>
 		return @_error 'invalid options passed to :raw' unless 'table' == type options
