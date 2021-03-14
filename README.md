@@ -50,3 +50,4 @@ package = NEON:web('http://path.to/the/file.lua')
 ## Packages
 - [flat](https://github.com/Belkworks/flat) - a simple flatfile
 - [quick](https://github.com/Belkworks/quick) - an underscore port
+- [chance](https://github.com/Belkworks/chance) - a random generator
