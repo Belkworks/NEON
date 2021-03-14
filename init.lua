@@ -41,7 +41,7 @@ do
       self:_debug("web request for " .. tostring(options.tag) .. " to " .. tostring(url))
       return syn.request({
         Url = url,
-        Method = 'GET',
+        Method = options.method or 'GET',
         Headers = options.headers or { },
         Cookies = options.cookies or { },
         Body = options.body or nil

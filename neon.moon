@@ -38,7 +38,7 @@ class Neon
 
 		syn.request
 			Url: url
-			Method: 'GET'
+			Method: options.method or 'GET'
 			Headers: options.headers or {}
 			Cookies: options.cookies or {}
 			Body: options.body or nil
