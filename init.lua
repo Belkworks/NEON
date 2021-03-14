@@ -107,6 +107,7 @@ do
         self:_writefile(code, options)
       end
       if options.text then
+        self:_cache(options.tag, code)
         return code
       end
       local chunk = self:_loadstring(code, options)
@@ -134,11 +135,9 @@ do
       if not ('string' == type(options.tag)) then
         return self:_error('invalid tag passed to :raw')
       end
-      do
-        local Y = self:_cachecheck(options.tag, options)
-        if Y then
-          return unpack(Y)
-        end
+      local cached = self:_cachecheck(options.tag, options)
+      if cached then
+        return cached
       end
       local found, result = self:_fromTag(options.tag)
       if found then

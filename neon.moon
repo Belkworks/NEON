@@ -78,6 +78,7 @@ class Neon
 			@_writefile code, options
 
 		if options.text
+			@_cache options.tag, code
 			return code
 
 		chunk = @_loadstring code, options
@@ -96,8 +97,8 @@ class Neon
 
 		return @_error 'invalid tag passed to :raw' unless 'string' == type options.tag
 
-		with Y = @_cachecheck options.tag, options
-			return unpack Y if Y
+		cached = @_cachecheck options.tag, options
+		return cached if cached
 
 		found, result = @_fromTag options.tag
 		return result if found
@@ -190,6 +191,6 @@ class Neon
 
 	__call: (...) => @github ...
 
-singleton = Neon! -- debug: true
+singleton = Neon!
 getgenv!.NEON = singleton if getgenv
 singleton
