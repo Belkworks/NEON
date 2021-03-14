@@ -1,3 +1,4 @@
+
 # NEON
 *A simple package manager for lua.*
 
@@ -45,3 +46,7 @@ package = NEON:web('http://path.to/the/file.lua')
 |`cache`|Boolean|True|Save the resource to file
 |`text`|Boolean|False|Return the raw text
 |`maxAge`|Number|7 Days|Maximum cached age (in minutes)
+
+## Packages
+- [flat](https://github.com/Belkworks/flat) - a simple flatfile
+- [quick](https://github.com/Belkworks/quick) - an underscore port
