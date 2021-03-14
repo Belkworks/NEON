@@ -1,5 +1,5 @@
 # NEON
-*A simple package manager for lua*
+*A simple package manager for lua.*
 
 ## Loader
 Here is a snippet to quickly download and run NEON.
