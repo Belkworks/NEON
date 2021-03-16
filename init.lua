@@ -279,6 +279,9 @@ do
         self.packages = _with_0:namespace('packages')
         self.manifest = _with_0
       end
+      self:github('belkworks', 'minify', nil, nil, {
+        _dontCache = true
+      })
       if not (self.packages:get(tag)) then
         self.packages:set(tag, {
           time = os.time()
