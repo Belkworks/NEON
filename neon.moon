@@ -195,9 +195,6 @@ class Neon
 		@manifest = with flat 'neon/manifest.json'
 			@packages = \namespace 'packages'
 
-		luamin = @github 'belkworks', 'minify', nil, nil, _dontCache: true
-		luamin = nil
-
 		unless @packages\get tag
 			@packages\set tag, time: os.time!
 

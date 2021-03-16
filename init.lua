@@ -279,10 +279,6 @@ do
         self.packages = _with_0:namespace('packages')
         self.manifest = _with_0
       end
-      local luamin = self:github('belkworks', 'minify', nil, nil, {
-        _dontCache = true
-      })
-      luamin = nil
       if not (self.packages:get(tag)) then
         self.packages:set(tag, {
           time = os.time()
