@@ -42,8 +42,9 @@ package = NEON:web('http://path.to/the/file.lua')
 `opts` is a dictionary that changes how files are loaded.
 |Key|Type|Default|Description|
 |--|--|--|--|
-|`fresh`|Boolean|False|Force the resource to be redownloaded|
 |`cache`|Boolean|True|Save the resource to file
+|`minify`|Boolean|True|Save the resource as minified Lua
+|`fresh`|Boolean|False|Force the resource to be redownloaded|
 |`text`|Boolean|False|Return the raw text
 |`maxAge`|Number|7 Days|Maximum cached age (in minutes)
 
