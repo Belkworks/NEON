@@ -49,7 +49,7 @@ class Neon
 		return if options.fresh
 		if E = @cache[tag]
 			@_debug "serving #{tag} from cache"
-			return E
+			return unpack E
 
 	_loadstring: (code, options = {}) =>
 		S, EorF = pcall loadstring, code
@@ -74,15 +74,18 @@ class Neon
 		return @_error 'invalid tag passed to :_execute' unless 'string' == type options.tag
 		@_debug "loading #{options.tag}"
 
-		if options.cache
-			@_writefile code, options
+		result = code
 
 		if options.text
 			@_cache options.tag, code
-			return code
+		else
+			chunk = @_loadstring code, options
+			result = @_executeChunk chunk, options
 
-		chunk = @_loadstring code, options
-		@_executeChunk chunk, options
+		if options.cache
+			@_writefile code, options
+
+		result
 
 	clearCache: (K) =>
 		K = tostring K
@@ -163,14 +166,19 @@ class Neon
 		name = tohex syn.crypt.derive options.tag, 12
 		path = "neon/cache/#{name}.bin"
 
-		dump = if options.text
+		defaults options, minify: true
+
+		data = if options.text
 			code
+		elseif options.minify
+			luamin = @github 'belkworks', 'minify'
+			luamin.minify code
 		else dumpstring code
 
-		writefile path, dump
+		writefile path, data
 		
 		if @packages
-			@packages\set options.tag, os.time!
+			@packages\set options.tag, time: os.time!
 			@manifest\write!
 
 		@_debug "wrote #{options.tag} to file as #{name}"
@@ -179,14 +187,18 @@ class Neon
 		@_error 'platform not supported!' unless syn
 		
 		@_makeDirectories!
+
 		tag = 'github:belkworks/flat[master]/init.lua'
 		flat = @github 'belkworks', 'flat'
 
 		@manifest = with flat 'neon/manifest.json'
 			@packages = \namespace 'packages'
 
+		@github 'belkworks', 'minify'
+
 		unless @packages\get tag
 			@packages\set tag, time: os.time!
+
 		@manifest\write!
 
 	__call: (...) => @github ...

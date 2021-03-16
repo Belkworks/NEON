@@ -61,7 +61,7 @@ do
         local E = self.cache[tag]
         if E then
           self:_debug("serving " .. tostring(tag) .. " from cache")
-          return E
+          return unpack(E)
         end
       end
     end,
@@ -103,15 +103,17 @@ do
         return self:_error('invalid tag passed to :_execute')
       end
       self:_debug("loading " .. tostring(options.tag))
+      local result = code
+      if options.text then
+        self:_cache(options.tag, code)
+      else
+        local chunk = self:_loadstring(code, options)
+        result = self:_executeChunk(chunk, options)
+      end
       if options.cache then
         self:_writefile(code, options)
       end
-      if options.text then
-        self:_cache(options.tag, code)
-        return code
-      end
-      local chunk = self:_loadstring(code, options)
-      return self:_executeChunk(chunk, options)
+      return result
     end,
     clearCache = function(self, K)
       K = tostring(K)
@@ -242,15 +244,23 @@ do
       self:_makeDirectories()
       local name = tohex(syn.crypt.derive(options.tag, 12))
       local path = "neon/cache/" .. tostring(name) .. ".bin"
-      local dump
+      defaults(options, {
+        minify = true
+      })
+      local data
       if options.text then
-        dump = code
+        data = code
+      elseif options.minify then
+        local luamin = self:github('belkworks', 'minify')
+        data = luamin.minify(code)
       else
-        dump = dumpstring(code)
+        data = dumpstring(code)
       end
-      writefile(path, dump)
+      writefile(path, data)
       if self.packages then
-        self.packages:set(options.tag, os.time())
+        self.packages:set(options.tag, {
+          time = os.time()
+        })
         self.manifest:write()
       end
       return self:_debug("wrote " .. tostring(options.tag) .. " to file as " .. tostring(name))
@@ -267,6 +277,7 @@ do
         self.packages = _with_0:namespace('packages')
         self.manifest = _with_0
       end
+      self:github('belkworks', 'minify')
       if not (self.packages:get(tag)) then
         self.packages:set(tag, {
           time = os.time()
