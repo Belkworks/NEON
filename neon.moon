@@ -20,8 +20,6 @@ class Neon
 		@cache = {}
 		@init!
 
-	__call: (url) => @raw url 
-
 	_debug: (...) =>
 		return unless @DEBUG
 		print '[DEBUG]',...
@@ -188,6 +186,8 @@ class Neon
 		@_error 'platform not supported!' unless syn
 		
 		@_makeDirectories!
+
+		game.Loaded\Wait! if not game\IsLoaded!
 
 		tag = 'github:belkworks/flat[master]/init.lua'
 		flat = @github 'belkworks', 'flat'

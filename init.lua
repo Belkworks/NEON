@@ -16,9 +16,6 @@ local Neon
 do
   local _class_0
   local _base_0 = {
-    __call = function(self, url)
-      return self:raw(url)
-    end,
     _debug = function(self, ...)
       if not (self.DEBUG) then
         return 
@@ -272,6 +269,9 @@ do
         self:_error('platform not supported!')
       end
       self:_makeDirectories()
+      if not game:IsLoaded() then
+        game.Loaded:Wait()
+      end
       local tag = 'github:belkworks/flat[master]/init.lua'
       local flat = self:github('belkworks', 'flat')
       do
