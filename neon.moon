@@ -63,7 +63,8 @@ class Neon
 		success = table.remove result, 1
 		if success
 			-- cache
-			@_cache options.tag, result
+			unless options._dontCache
+				@_cache options.tag, result
 			unpack result
 		else
 			err = table.remove result, 1
@@ -194,7 +195,8 @@ class Neon
 		@manifest = with flat 'neon/manifest.json'
 			@packages = \namespace 'packages'
 
-		@github 'belkworks', 'minify'
+		luamin = @github 'belkworks', 'minify', nil, nil, _dontCache: true
+		luamin = nil
 
 		unless @packages\get tag
 			@packages\set tag, time: os.time!

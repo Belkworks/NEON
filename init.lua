@@ -85,7 +85,9 @@ do
       }
       local success = table.remove(result, 1)
       if success then
-        self:_cache(options.tag, result)
+        if not (options._dontCache) then
+          self:_cache(options.tag, result)
+        end
         return unpack(result)
       else
         local err = table.remove(result, 1)
@@ -277,7 +279,10 @@ do
         self.packages = _with_0:namespace('packages')
         self.manifest = _with_0
       end
-      self:github('belkworks', 'minify')
+      local luamin = self:github('belkworks', 'minify', nil, nil, {
+        _dontCache = true
+      })
+      luamin = nil
       if not (self.packages:get(tag)) then
         self.packages:set(tag, {
           time = os.time()
