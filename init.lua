@@ -104,6 +104,9 @@ do
       if not ('string' == type(options.tag)) then
         return self:_error('invalid tag passed to :_execute')
       end
+      if not (self.haveInit) then
+        self:_init()
+      end
       self:_debug("loading " .. tostring(options.tag))
       local result = code
       if options.text then
@@ -271,6 +274,7 @@ do
       if not (syn) then
         self:_error('platform not supported!')
       end
+      self:_debug("running init routine")
       self:_makeDirectories()
       if not game:IsLoaded() then
         game.Loaded:Wait()
@@ -290,7 +294,8 @@ do
           time = os.time()
         })
       end
-      return self.manifest:write()
+      self.manifest:write()
+      self.haveInit = true
     end,
     __call = function(self, ...)
       return self:github(...)
@@ -307,7 +312,6 @@ do
       })
       self.DEBUG = options.debug
       self.cache = { }
-      return self:init()
     end,
     __base = _base_0,
     __name = "Neon"

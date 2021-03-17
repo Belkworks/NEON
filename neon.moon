@@ -20,14 +20,13 @@ class Neon
 		defaults options, debug: false
 		@DEBUG = options.debug
 		@cache = {}
-		@init!
 
 	_debug: (...) =>
 		return unless @DEBUG
-		print '[DEBUG]',...
+		print '[DEBUG]', ... -- TODO: write to event log?
 
 	_error: (message) =>
-		error message -- TODO: show onscreen?
+		error message -- TODO: show onscreen? write to event log?
 		return
 
 	_http: (url, options = {}) =>
@@ -73,6 +72,8 @@ class Neon
 	_execute: (code, options = {}) => -- str -> ...result
 		return @_error 'invalid options passed to :_execute' unless 'table' == type options
 		return @_error 'invalid tag passed to :_execute' unless 'string' == type options.tag
+		@_init! unless @haveInit
+
 		@_debug "loading #{options.tag}"
 
 		result = code
@@ -186,7 +187,8 @@ class Neon
 
 	init: =>
 		@_error 'platform not supported!' unless syn
-		
+		@_debug "running init routine"
+
 		@_makeDirectories!
 
 		game.Loaded\Wait! if not game\IsLoaded!
@@ -203,6 +205,7 @@ class Neon
 			@packages\set tag, time: os.time!
 
 		@manifest\write!
+		@haveInit = true
 
 	__call: (...) => @github ...
 
