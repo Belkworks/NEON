@@ -3,16 +3,19 @@
 *A simple dependency fetcher for Synapse.*
 
 ## Loader
-Save this snippet to your `autoexec`.
+Run this snippet to download and run NEON.
 ```lua
-if not isfolder('neon')then makefolder('neon')end
-if not isfile('neon/init.lua')then
-    local raw = 'https://raw.githubusercontent.com/%s/%s/master/init.lua'
-    writefile('neon/init.lua',game:HttpGet(raw:format('belkworks','neon')))
+if not NEON then
+    if not isfile('neon/init.lua')then
+        makefolder('neon')
+        local raw = 'https://raw.githubusercontent.com/%s/%s/master/init.lua'
+        writefile('neon/init.lua',game:HttpGet(raw:format('belkworks','neon')))
+    end
+    pcall(loadfile('neon/init.lua'))
 end
-pcall(loadfile('neon/init.lua'))
 -- now NEON will be in the environment!
 ```
+Alternatively, you can download the [loader](https://raw.githubusercontent.com/Belkworks/NEON/master/loader.lua) and put it in your `autoexec` folder.
 ## API
 **Loading from GitHub**
 ```lua
