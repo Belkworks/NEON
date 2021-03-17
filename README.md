@@ -1,6 +1,6 @@
 
 # NEON
-*A simple package manager for lua.*
+*A simple package manager for Lua.*
 
 ## Loader
 Here is a snippet to quickly download and run NEON.
@@ -48,7 +48,9 @@ package = NEON:web('http://path.to/the/file.lua')
 |`text`|Boolean|False|Return the raw text
 |`maxAge`|Number|7 Days|Maximum cached age (in minutes)
 
-## Packages
+## My Packages
 - [flat](https://github.com/Belkworks/flat) - a simple flatfile
 - [quick](https://github.com/Belkworks/quick) - an underscore port
 - [chance](https://github.com/Belkworks/chance) - a random generator
+- [logfile](https://github.com/Belkworks/logfile) - a log writer
+- [future](https://github.com/Belkworks/future) - an alternative to promises
