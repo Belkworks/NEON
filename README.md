@@ -1,9 +1,9 @@
 
 # NEON
-*A simple package manager for Lua.*
+*A simple dependency fetcher for Synapse.*
 
 ## Loader
-Here is a snippet to quickly download and run NEON.
+Save this snippet to your `autoexec`.
 ```lua
 if not isfolder('neon')then makefolder('neon')end
 if not isfile('neon/init.lua')then
@@ -11,6 +11,7 @@ if not isfile('neon/init.lua')then
     writefile('neon/init.lua',game:HttpGet(raw:format('belkworks','neon')))
 end
 pcall(loadfile('neon/init.lua'))
+-- now NEON will be in the environment!
 ```
 ## API
 **Loading from GitHub**
@@ -39,7 +40,7 @@ package = NEON:web('http://path.to/the/file.lua')
 
 **Options**
 
-`opts` is a dictionary that changes how files are loaded.
+`opts` is a dictionary that changes how modules are loaded/saved.
 |Key|Type|Default|Description|
 |--|--|--|--|
 |`cache`|Boolean|True|Save the resource to file
@@ -49,7 +50,7 @@ package = NEON:web('http://path.to/the/file.lua')
 |`maxAge`|Number|7 Days|Maximum cached age (in minutes)
 
 ## Official Modules
-- [flat](https://github.com/Belkworks/flat) - a simple flatfile
+- [flat](https://github.com/Belkworks/flat) - a simple flatfile database
 - [quick](https://github.com/Belkworks/quick) - an underscore port
 - [chance](https://github.com/Belkworks/chance) - a random generator
 - [logfile](https://github.com/Belkworks/logfile) - a log writer
