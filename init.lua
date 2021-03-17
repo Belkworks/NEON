@@ -1,3 +1,6 @@
+if NEON then
+  return NEON
+end
 local defaults
 defaults = function(d, s)
   for i in pairs(s) do
@@ -275,7 +278,7 @@ do
       local tag = 'github:belkworks/flat[master]/init.lua'
       local flat = self:github('belkworks', 'flat')
       do
-        local _with_0 = flat('neon/manifest.json')
+        local _with_0 = flat('neon/cache/manifest.json')
         self.packages = _with_0:namespace('packages')
         self.manifest = _with_0
       end

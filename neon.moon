@@ -1,6 +1,8 @@
 -- init.moon - neon
 -- SFZILabs 2020
 
+return NEON if NEON -- don't load twice
+
 defaults = (d, s) ->
 	for i in pairs s
 		d[i] = s[i] if d[i] == nil
@@ -192,7 +194,7 @@ class Neon
 		tag = 'github:belkworks/flat[master]/init.lua'
 		flat = @github 'belkworks', 'flat'
 
-		@manifest = with flat 'neon/manifest.json'
+		@manifest = with flat 'neon/cache/manifest.json'
 			@packages = \namespace 'packages'
 
 		@github 'belkworks', 'minify', nil, nil, _dontCache: true
