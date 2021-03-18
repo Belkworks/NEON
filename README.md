@@ -1,8 +1,10 @@
 
 # NEON
+
 *A simple dependency fetcher for Synapse.*
 
 ## Loader
+
 Run this snippet to download and run NEON.
 ```lua
 if not NEON then
@@ -16,8 +18,11 @@ end
 -- now NEON will be in the environment!
 ```
 Alternatively, you can download the [loader](https://raw.githubusercontent.com/Belkworks/NEON/master/loader.lua) and put it in your `autoexec` folder.
+
 ## API
+
 **Loading from GitHub**
+
 ```lua
 :github(author, repository, file = 'init.lua', branch = 'master', opts)
 ```
@@ -26,6 +31,7 @@ quick = NEON:github('belkworks', 'quick')
 ```
 
 **Loading from Pastebin**
+
 ```lua
 :pastebin(id, opts)
 ```
@@ -34,6 +40,7 @@ package = NEON:pastebin('pastebin-id')
 ```
 
 **Loading from URL**
+
 ```lua
 :web(url, opts)
 ```
@@ -53,6 +60,7 @@ package = NEON:web('http://path.to/the/file.lua')
 |`maxAge`|Number|7 Days|Maximum cached age (in minutes)
 
 ## Official Modules
+
 - [flat](https://github.com/Belkworks/flat) - a simple flatfile database
 - [quick](https://github.com/Belkworks/quick) - an underscore port
 - [chance](https://github.com/Belkworks/chance) - a random generator
