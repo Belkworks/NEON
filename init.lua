@@ -250,7 +250,7 @@ do
       local name = tohex(syn.crypt.derive(options.tag, 12))
       local path = "neon/cache/" .. tostring(name) .. ".bin"
       defaults(options, {
-        minify = true
+        minify = false
       })
       local data
       if options.text then
@@ -275,6 +275,7 @@ do
         self:_error('platform not supported!')
       end
       self:_debug("running init routine")
+      self.haveInit = true
       self:_makeDirectories()
       if not game:IsLoaded() then
         game.Loaded:Wait()
@@ -294,8 +295,7 @@ do
           time = os.time()
         })
       end
-      self.manifest:write()
-      self.haveInit = true
+      return self.manifest:write()
     end,
     __call = function(self, ...)
       return self:github(...)

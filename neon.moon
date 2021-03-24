@@ -168,7 +168,7 @@ class Neon
 		name = tohex syn.crypt.derive options.tag, 12
 		path = "neon/cache/#{name}.bin"
 
-		defaults options, minify: true
+		defaults options, minify: false
 
 		data = if options.text
 			code
@@ -188,6 +188,7 @@ class Neon
 	_init: =>
 		@_error 'platform not supported!' unless syn
 		@_debug "running init routine"
+		@haveInit = true
 
 		@_makeDirectories!
 
@@ -205,7 +206,6 @@ class Neon
 			@packages\set tag, time: os.time!
 
 		@manifest\write!
-		@haveInit = true
 
 	__call: (...) => @github ...
 
