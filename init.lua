@@ -270,7 +270,7 @@ do
       end
       return self:_debug("wrote " .. tostring(options.tag) .. " to file as " .. tostring(name))
     end,
-    init = function(self)
+    _init = function(self)
       if not (syn) then
         self:_error('platform not supported!')
       end

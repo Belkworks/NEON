@@ -185,7 +185,7 @@ class Neon
 
 		@_debug "wrote #{options.tag} to file as #{name}"
 
-	init: =>
+	_init: =>
 		@_error 'platform not supported!' unless syn
 		@_debug "running init routine"
 
