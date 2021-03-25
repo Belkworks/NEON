@@ -141,6 +141,8 @@ class Neon
 		unless isfolder 'neon/cache'
 			makefolder 'neon/cache'
 
+	_tagToFile: (tag) => syn.crypt.hash('neonfile:' .. tag)\upper!\sub 1, 24
+
 	_fromTag: (tag, options = {}) =>
 		return if options.fresh
 
@@ -153,7 +155,7 @@ class Neon
 				return if os.time! - x.time > options.maxAge*60
 			else return
 
-		name = tohex syn.crypt.derive tag, 12
+		name = @_tagToFile tag
 		path = "neon/cache/#{name}.bin"
 		if isfile path
 			if code = readfile path
@@ -165,7 +167,7 @@ class Neon
 	_writefile: (code, options) =>
 		@_makeDirectories!
 
-		name = tohex syn.crypt.derive options.tag, 12
+		name = @_tagToFile options.tag
 		path = "neon/cache/#{name}.bin"
 
 		defaults options, minify: false
@@ -199,8 +201,6 @@ class Neon
 
 		@manifest = with flat 'neon/cache/manifest.json'
 			@packages = \namespace 'packages'
-
-		@github 'belkworks', 'minify', nil, nil, _dontCache: true
 
 		unless @packages\get tag
 			@packages\set tag, time: os.time!

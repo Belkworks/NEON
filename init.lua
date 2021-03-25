@@ -208,6 +208,9 @@ do
         return makefolder('neon/cache')
       end
     end,
+    _tagToFile = function(self, tag)
+      return syn.crypt.hash('neonfile:' .. tag):upper():sub(1, 24)
+    end,
     _fromTag = function(self, tag, options)
       if options == nil then
         options = { }
@@ -231,7 +234,7 @@ do
           end
         end
       end
-      local name = tohex(syn.crypt.derive(tag, 12))
+      local name = self:_tagToFile(tag)
       local path = "neon/cache/" .. tostring(name) .. ".bin"
       if isfile(path) then
         do
@@ -247,7 +250,7 @@ do
     end,
     _writefile = function(self, code, options)
       self:_makeDirectories()
-      local name = tohex(syn.crypt.derive(options.tag, 12))
+      local name = self:_tagToFile(options.tag)
       local path = "neon/cache/" .. tostring(name) .. ".bin"
       defaults(options, {
         minify = false
@@ -287,9 +290,6 @@ do
         self.packages = _with_0:namespace('packages')
         self.manifest = _with_0
       end
-      self:github('belkworks', 'minify', nil, nil, {
-        _dontCache = true
-      })
       if not (self.packages:get(tag)) then
         self.packages:set(tag, {
           time = os.time()
