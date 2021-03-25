@@ -172,12 +172,12 @@ class Neon
 
 		defaults options, minify: false
 
-		data = if options.text
-			code
-		elseif options.minify
+		data = if options.minify
 			luamin = @github 'belkworks', 'minify'
 			luamin.minify code
-		else dumpstring code
+		elseif options.dump
+			dumpstring code
+		else code
 
 		writefile path, data
 		

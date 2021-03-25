@@ -256,13 +256,13 @@ do
         minify = false
       })
       local data
-      if options.text then
-        data = code
-      elseif options.minify then
+      if options.minify then
         local luamin = self:github('belkworks', 'minify')
         data = luamin.minify(code)
-      else
+      elseif options.dump then
         data = dumpstring(code)
+      else
+        data = code
       end
       writefile(path, data)
       if self.packages then
