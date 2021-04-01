@@ -1,14 +1,6 @@
 if NEON then
   return NEON
 end
-local defaults
-defaults = function(d, s)
-  for i in pairs(s) do
-    if d[i] == nil then
-      d[i] = s[i]
-    end
-  end
-end
 local tohex
 tohex = function(s)
   return s:gsub('.', function(c)
@@ -22,6 +14,20 @@ copy = function(t)
     _tbl_0[i] = v
   end
   return _tbl_0
+end
+local defaults
+defaults = function(d, s)
+  for i in pairs(s) do
+    if d[i] == nil then
+      d[i] = s[i]
+    end
+  end
+end
+local clonedefaults
+clonedefaults = function(d, s)
+  d = copy(d)
+  defaults(d, s)
+  return d
 end
 local Neon
 do
@@ -143,8 +149,7 @@ do
       if not ('table' == type(options)) then
         return self:_error('invalid options passed to :raw')
       end
-      options = copy(options)
-      defaults(options, {
+      options = clonedefaults(options, {
         tag = "web:" .. tostring(url),
         cache = true
       })
@@ -173,7 +178,7 @@ do
       if not ('string' == type(id)) then
         return self:_error('invalid id passed to :pastebin')
       end
-      defaults(options, {
+      options = clonedefaults(options, {
         tag = "pastebin:" .. tostring(id)
       })
       return self:web("https://pastebin.com/raw/" .. tostring(id), options)
@@ -200,7 +205,7 @@ do
       if not ('string' == type(branch)) then
         return self:_error('no branch passed to :github')
       end
-      defaults(options, {
+      options = clonedefaults(options, {
         tag = "github:" .. tostring(user) .. "/" .. tostring(repo) .. "[" .. tostring(branch) .. "]/" .. tostring(file)
       })
       do

@@ -3,12 +3,17 @@
 
 return NEON if NEON -- don't load twice
 
+tohex = (s) -> s\gsub '.', (c) -> string.format '%02X', string.byte c
+copy = (t) -> {i, v for i, v in pairs t}
+
 defaults = (d, s) ->
     for i in pairs s
         d[i] = s[i] if d[i] == nil
 
-tohex = (s) -> s\gsub '.', (c) -> string.format '%02X', string.byte c
-copy = (t) -> {i, v for i, v in pairs t}
+clonedefaults = (d, s) ->
+    d = copy d
+    defaults d, s
+    d
 
 --  Options:
 --      fresh: force redownload
@@ -99,8 +104,7 @@ class Neon
     web: (url, options = {}) =>
         return @_error 'invalid options passed to :raw' unless 'table' == type options
 
-        options = copy options
-        defaults options, tag: "web:#{url}", cache: true
+        options = clonedefaults options, tag: "web:#{url}", cache: true
 
         return @_error 'invalid tag passed to :raw' unless 'string' == type options.tag
 
@@ -118,7 +122,7 @@ class Neon
     pastebin: (id, options = {}) =>
         return @_error 'invalid id passed to :pastebin' unless 'string' == type id
 
-        defaults options, tag: "pastebin:#{id}"
+        options = clonedefaults options, tag: "pastebin:#{id}"
         @web "https://pastebin.com/raw/#{id}", options
 
     github: (user, repo, file = 'init.lua', branch = 'master', options = {}) =>
@@ -127,7 +131,7 @@ class Neon
         return @_error 'no file passed to :github' unless 'string' == type file
         return @_error 'no branch passed to :github' unless 'string' == type branch
 
-        defaults options, tag: "github:#{user}/#{repo}[#{branch}]/#{file}"
+        options = clonedefaults options, tag: "github:#{user}/#{repo}[#{branch}]/#{file}"
 
         -- TODO: tag with last commit
         -- url: https://api.github.com/repos/user/repo/commits
