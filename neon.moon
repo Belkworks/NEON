@@ -8,6 +8,7 @@ defaults = (d, s) ->
         d[i] = s[i] if d[i] == nil
 
 tohex = (s) -> s\gsub '.', (c) -> string.format '%02X', string.byte c
+copy = (t) -> {i, v for i, v in pairs t}
 
 --  Options:
 --      fresh: force redownload
@@ -98,6 +99,7 @@ class Neon
     web: (url, options = {}) =>
         return @_error 'invalid options passed to :raw' unless 'table' == type options
 
+        options = copy options
         defaults options, tag: "web:#{url}", cache: true
 
         return @_error 'invalid tag passed to :raw' unless 'string' == type options.tag

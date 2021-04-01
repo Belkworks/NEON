@@ -15,6 +15,14 @@ tohex = function(s)
     return string.format('%02X', string.byte(c))
   end)
 end
+local copy
+copy = function(t)
+  local _tbl_0 = { }
+  for i, v in pairs(t) do
+    _tbl_0[i] = v
+  end
+  return _tbl_0
+end
 local Neon
 do
   local _class_0
@@ -135,6 +143,7 @@ do
       if not ('table' == type(options)) then
         return self:_error('invalid options passed to :raw')
       end
+      options = copy(options)
       defaults(options, {
         tag = "web:" .. tostring(url),
         cache = true
