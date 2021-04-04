@@ -1,4 +1,4 @@
--- init.moon - neon
+-- neon.moon
 -- SFZILabs 2020
 
 return NEON if NEON -- don't load twice
