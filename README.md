@@ -71,3 +71,4 @@ package = NEON:web('http://path.to/the/file.lua')
 - [broom](https://github.com/Belkworks/broom) - a reactive task runner, inspired by Nevermore's `maid` class.
 - [machine](https://github.com/Belkworks/machine) - a robust state machine
 - [clerk](https://github.com/Belkworks/clerk) - a state manager
+- [gate](https://github.com/Belkworks/gate) - a pausable event handler
