@@ -125,6 +125,12 @@ class Neon
         options = clonedefaults options, tag: "pastebin:#{id}"
         @web "https://pastebin.com/raw/#{id}", options
 
+    ghostbin: (id, options = {}) =>
+        return @_error 'invalid id passed to :ghostbin' unless 'string' == type id
+
+        options = clonedefaults options, tag: "ghostbin:#{id}"
+        @web "https://ghostbin.co/paste/#{id}/raw", options
+
     github: (user, repo, file = 'init.lua', branch = 'master', options = {}) =>
         return @_error 'no user passed to :github' unless 'string' == type user
         return @_error 'no repo passed to :github' unless 'string' == type repo

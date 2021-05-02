@@ -39,6 +39,12 @@ quick = NEON:github('belkworks', 'quick')
 package = NEON:pastebin('pastebin-id')
 ```
 
+**Loading from Ghostbin**
+
+```lua
+:ghostbin(id, opts)
+```
+
 **Loading from URL**
 
 ```lua

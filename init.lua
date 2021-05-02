@@ -183,6 +183,18 @@ do
       })
       return self:web("https://pastebin.com/raw/" .. tostring(id), options)
     end,
+    ghostbin = function(self, id, options)
+      if options == nil then
+        options = { }
+      end
+      if not ('string' == type(id)) then
+        return self:_error('invalid id passed to :ghostbin')
+      end
+      options = clonedefaults(options, {
+        tag = "ghostbin:" .. tostring(id)
+      })
+      return self:web("https://ghostbin.co/paste/" .. tostring(id) .. "/raw", options)
+    end,
     github = function(self, user, repo, file, branch, options)
       if file == nil then
         file = 'init.lua'
