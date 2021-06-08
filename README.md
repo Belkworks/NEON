@@ -80,3 +80,4 @@ package = NEON:web('http://path.to/the/file.lua')
 - [gate](https://github.com/Belkworks/gate) - a pausable event handler
 - [builder](https://github.com/Belkworks/builder) - a table builder
 - [mono](https://github.com/Belkworks/mono) - a table printer
+- [chain](https://github.com/Belkworks/chain) - a middleware runner
