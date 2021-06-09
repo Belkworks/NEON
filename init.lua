@@ -250,7 +250,7 @@ do
       })
       if self.packages then
         do
-          local x = self.packages:get(tag)
+          local x = self.packages.get(tag):value()
           if x then
             if os.time() - x.time > options.maxAge * 60 then
               return 
@@ -292,9 +292,9 @@ do
       end
       writefile(path, data)
       if self.packages then
-        self.packages:set(options.tag, {
+        self.packages.set(options.tag, {
           time = os.time()
-        })
+        }):write()
         self.manifest:write()
       end
       return self:_debug("wrote " .. tostring(options.tag) .. " to file as " .. tostring(name))
@@ -316,10 +316,10 @@ do
         self.packages = _with_0:namespace('packages')
         self.manifest = _with_0
       end
-      if not (self.packages:get(tag)) then
-        self.packages:set(tag, {
+      if not (self.packages.get(tag):value()) then
+        self.packages.set(tag, {
           time = os.time()
-        })
+        }):write()
       end
       return self.manifest:write()
     end,

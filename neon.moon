@@ -163,7 +163,7 @@ class Neon
         defaults options, maxAge: 7 * 24 * 60
         
         if @packages
-            if x = @packages\get tag
+            if x = @packages.get(tag)\value!
                 return if os.time! - x.time > options.maxAge*60
             else return
 
@@ -194,7 +194,7 @@ class Neon
         writefile path, data
         
         if @packages
-            @packages\set options.tag, time: os.time!
+            @packages.set(options.tag, time: os.time!)\write!
             @manifest\write!
 
         @_debug "wrote #{options.tag} to file as #{name}"
@@ -214,8 +214,8 @@ class Neon
         @manifest = with flat 'neon/cache/manifest.json'
             @packages = \namespace 'packages'
 
-        unless @packages\get tag
-            @packages\set tag, time: os.time!
+        unless @packages.get(tag)\value!
+            @packages.set(tag, time: os.time!)\write!
 
         @manifest\write!
 
