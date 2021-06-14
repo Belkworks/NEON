@@ -105,7 +105,7 @@ do
         return unpack(result)
       else
         local err = table.remove(result, 1)
-        return self:_error('error execute #{options.tag}: #{err}')
+        return self:_error("error executing " .. tostring(options.tag) .. ": " .. tostring(err))
       end
     end,
     _execute = function(self, code, options)

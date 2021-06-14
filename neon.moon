@@ -73,7 +73,7 @@ class Neon
             unpack result
         else
             err = table.remove result, 1
-            @_error 'error execute #{options.tag}: #{err}'
+            @_error "error executing #{options.tag}: #{err}"
 
     _execute: (code, options = {}) => -- str -> ...result
         return @_error 'invalid options passed to :_execute' unless 'table' == type options
