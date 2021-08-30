@@ -85,7 +85,7 @@ class Neon
         result = code
 
         if options.text
-            @_cache options.tag, code
+            @_cache options.tag, { code }
         else
             chunk = @_loadstring code, options
             result = @_executeChunk chunk, options
@@ -111,7 +111,7 @@ class Neon
         cached = @_cachecheck options.tag, options
         return cached if cached
 
-        found, result = @_fromTag options.tag
+        found, result = @_fromTag options.tag, options
         return result if found
 
         response = @_http url, options

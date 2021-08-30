@@ -124,7 +124,9 @@ do
       self:_debug("loading " .. tostring(options.tag))
       local result = code
       if options.text then
-        self:_cache(options.tag, code)
+        self:_cache(options.tag, {
+          code
+        })
       else
         local chunk = self:_loadstring(code, options)
         result = self:_executeChunk(chunk, options)
@@ -160,7 +162,7 @@ do
       if cached then
         return cached
       end
-      local found, result = self:_fromTag(options.tag)
+      local found, result = self:_fromTag(options.tag, options)
       if found then
         return result
       end
