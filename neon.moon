@@ -28,12 +28,10 @@ class Neon
         @cache = {}
 
     _debug: (...) =>
-        return unless @DEBUG
-        print '[DEBUG]', ... -- TODO: write to event log?
+        print '[DEBUG]', ... if @DEBUG
 
     _error: (message) =>
         error message -- TODO: show onscreen? write to event log?
-        return
 
     _http: (url, options = {}) =>
         return @_error 'your exploit does not support http requests!' unless syn
@@ -158,7 +156,7 @@ class Neon
     _tagToFile: (tag) => syn.crypt.hash('neonfile:' .. tag)\upper!\sub 1, 24
 
     _fromTag: (tag, options = {}) =>
-        return if options.fresh
+        return if options.fetch
 
         @_makeDirectories!
 
