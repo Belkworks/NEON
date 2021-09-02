@@ -115,9 +115,11 @@ class Neon
         return result if found
 
         response = @_http url, options
-        if response.Success
-            @_execute response.Body, options
-        else @_error "failed http request to #{url}"
+        if (type response) == 'table'
+            if response.Success
+                return @_execute response.Body, options
+
+        @_error "failed http request to #{url}"
 
     pastebin: (id, options = {}) =>
         return @_error 'invalid id passed to :pastebin' unless 'string' == type id
