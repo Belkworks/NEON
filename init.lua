@@ -34,13 +34,12 @@ do
   local _class_0
   local _base_0 = {
     _debug = function(self, ...)
-      if not (self.DEBUG) then
-        return 
+      if self.DEBUG then
+        return print('[DEBUG]', ...)
       end
-      return print('[DEBUG]', ...)
     end,
     _error = function(self, message)
-      error(message)
+      return error(message)
     end,
     _http = function(self, url, options)
       if options == nil then
@@ -167,11 +166,12 @@ do
         return result
       end
       local response = self:_http(url, options)
-      if response.Success then
-        return self:_execute(response.Body, options)
-      else
-        return self:_error("failed http request to " .. tostring(url))
+      if (type(response)) == 'table' then
+        if response.Success then
+          return self:_execute(response.Body, options)
+        end
       end
+      return self:_error("failed http request to " .. tostring(url))
     end,
     pastebin = function(self, id, options)
       if options == nil then
@@ -243,7 +243,7 @@ do
       if options == nil then
         options = { }
       end
-      if options.fresh then
+      if options.fetch then
         return 
       end
       self:_makeDirectories()
