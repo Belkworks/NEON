@@ -72,6 +72,7 @@ package = NEON:web('http://path.to/the/file.lua')
 - [chance](https://github.com/Belkworks/chance) - a random generator
 - [logfile](https://github.com/Belkworks/logfile) - a log writer
 - [synlog](https://github.com/Belkworks/synlog) - a visual logger compatible with logfile
+- [chalk](https://github.com/Belkworks/chalk) - a terminal styler
 - [future](https://github.com/Belkworks/future) - an alternative to promises
 - [hold](https://github.com/Belkworks/hold) - a caching mechanism
 - [broom](https://github.com/Belkworks/broom) - a reactive task runner, inspired by Nevermore's `maid` class.
@@ -81,3 +82,4 @@ package = NEON:web('http://path.to/the/file.lua')
 - [builder](https://github.com/Belkworks/builder) - a table builder
 - [mono](https://github.com/Belkworks/mono) - a table printer
 - [chain](https://github.com/Belkworks/chain) - a middleware runner
+- [flags](https://github.com/Belkworks/flags) - a flag reader/writer
