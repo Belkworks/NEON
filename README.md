@@ -24,11 +24,13 @@ Alternatively, you can download the [loader](https://raw.githubusercontent.com/B
 **Loading from GitHub**
 
 ```lua
-:github(author, repository, file = 'init.lua', branch = 'master', opts)
+:github(author, repository, opts)
 ```
 ```lua
+-- gets 'init.lua' from the 'master' branch
 quick = NEON:github('belkworks', 'quick')
 ```
+To use a different file/branch, specify `file` or `branch` in `opts`.
 
 **Loading from Pastebin**
 
@@ -83,3 +85,4 @@ package = NEON:web('http://path.to/the/file.lua')
 - [mono](https://github.com/Belkworks/mono) - a table printer
 - [chain](https://github.com/Belkworks/chain) - a middleware runner
 - [flags](https://github.com/Belkworks/flags) - a flag reader/writer
+- [bucket](https://github.com/Belkworks/bucket) - a rate limiter
