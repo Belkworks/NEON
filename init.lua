@@ -197,16 +197,12 @@ do
       })
       return self:web("https://ghostbin.co/paste/" .. tostring(id) .. "/raw", options)
     end,
-    github = function(self, user, repo, file, branch, options)
-      if file == nil then
-        file = 'init.lua'
-      end
-      if branch == nil then
-        branch = 'master'
-      end
+    github = function(self, user, repo, options)
       if options == nil then
         options = { }
       end
+      local file = options.file or 'init.lua'
+      local branch = options.branch or 'master'
       if not ('string' == type(user)) then
         return self:_error('no user passed to :github')
       end

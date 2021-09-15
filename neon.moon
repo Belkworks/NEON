@@ -131,7 +131,9 @@ class Neon
         options = clonedefaults options, tag: "ghostbin:#{id}"
         @web "https://ghostbin.co/paste/#{id}/raw", options
 
-    github: (user, repo, file = 'init.lua', branch = 'master', options = {}) =>
+    github: (user, repo, options = {}) =>
+        file = options.file or 'init.lua'
+        branch = options.branch or 'master'
         return @_error 'no user passed to :github' unless 'string' == type user
         return @_error 'no repo passed to :github' unless 'string' == type repo
         return @_error 'no file passed to :github' unless 'string' == type file
