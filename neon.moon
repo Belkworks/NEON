@@ -55,7 +55,7 @@ class Neon
             return unpack E
 
     _loadstring: (code, options = {}) =>
-        S, EorF = pcall loadstring, code
+        S, EorF = pcall loadstring, code, options.tag or 'neon:unknown'
         if S
             EorF
         else @_error "error loadstring #{options.tag}: #{EorF}"

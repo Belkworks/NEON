@@ -82,7 +82,7 @@ do
       if options == nil then
         options = { }
       end
-      local S, EorF = pcall(loadstring, code)
+      local S, EorF = pcall(loadstring, code, options.tag or 'neon:unknown')
       if S then
         return EorF
       else
