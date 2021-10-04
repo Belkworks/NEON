@@ -129,6 +129,10 @@ do
       else
         local chunk = self:_loadstring(code, options)
         result = self:_executeChunk(chunk, options)
+        if options.secured then
+          result = getgenv()[options.secured]
+          getgenv()[options.secured] = nil
+        end
       end
       if options.cache then
         self:_writefile(code, options)

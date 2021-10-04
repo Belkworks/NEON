@@ -87,6 +87,9 @@ class Neon
         else
             chunk = @_loadstring code, options
             result = @_executeChunk chunk, options
+            if options.secured
+                result = getgenv![options.secured]
+                getgenv![options.secured] = nil
 
         if options.cache
             @_writefile code, options
