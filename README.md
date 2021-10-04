@@ -66,6 +66,7 @@ package = NEON:web('http://path.to/the/file.lua')
 |`fresh`|Boolean|False|Force the resource to be redownloaded|
 |`text`|Boolean|False|Return the raw text
 |`maxAge`|Number|7 Days|Maximum cached age (in minutes)
+|`secured`|String||Value to take from the global environment|
 
 ## Official Modules
 
@@ -86,3 +87,4 @@ package = NEON:web('http://path.to/the/file.lua')
 - [chain](https://github.com/Belkworks/chain) - a middleware runner
 - [flags](https://github.com/Belkworks/flags) - a flag reader/writer
 - [bucket](https://github.com/Belkworks/bucket) - a rate limiter
+- [envo](https://github.com/Belkworks/envo) - secure environment variables 
