@@ -98,9 +98,6 @@ do
       }
       local success = table.remove(result, 1)
       if success then
-        if not (options._dontCache) then
-          self:_cache(options.tag, result)
-        end
         return unpack(result)
       else
         local err = table.remove(result, 1)
@@ -129,9 +126,19 @@ do
       else
         local chunk = self:_loadstring(code, options)
         result = self:_executeChunk(chunk, options)
-        if options.secured then
-          result = getgenv()[options.secured]
-          getgenv()[options.secured] = nil
+        do
+          local target = options.secured
+          if target then
+            local env = getgenv()
+            while not env[target] do
+              wait()
+            end
+            result = env[options.secured]
+            env[options.secured] = nil
+          end
+        end
+        if not (options._dontCache) then
+          self:_cache(options.tag, result)
         end
       end
       if options.cache then

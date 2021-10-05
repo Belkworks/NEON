@@ -65,9 +65,6 @@ class Neon
         result = { pcall chunk }
         success = table.remove result, 1
         if success
-            -- cache
-            unless options._dontCache
-                @_cache options.tag, result
             unpack result
         else
             err = table.remove result, 1
@@ -87,9 +84,17 @@ class Neon
         else
             chunk = @_loadstring code, options
             result = @_executeChunk chunk, options
-            if options.secured
-                result = getgenv![options.secured]
-                getgenv![options.secured] = nil
+            if target = options.secured
+                env = getgenv!
+                while not env[target]
+                    wait!
+
+                result = env[options.secured]
+                env[options.secured] = nil
+
+            -- cache
+            unless options._dontCache
+                @_cache options.tag, result
 
         if options.cache
             @_writefile code, options
