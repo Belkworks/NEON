@@ -94,7 +94,7 @@ class Neon
 
             -- cache
             unless options._dontCache
-                @_cache options.tag, result
+                @_cache options.tag, { result }
 
         if options.cache
             @_writefile code, options

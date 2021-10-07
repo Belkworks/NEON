@@ -138,7 +138,9 @@ do
           end
         end
         if not (options._dontCache) then
-          self:_cache(options.tag, result)
+          self:_cache(options.tag, {
+            result
+          })
         end
       end
       if options.cache then
