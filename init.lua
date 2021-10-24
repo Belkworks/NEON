@@ -237,6 +237,9 @@ do
         return self:web(url, options)
       end
     end,
+    belkworks = function(self, repo, options)
+      return self:github('belkworks', repo, options)
+    end,
     _makeDirectories = function(self)
       if not (isfolder('neon')) then
         makefolder('neon')

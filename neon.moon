@@ -156,6 +156,9 @@ class Neon
             url = \format user, repo, branch, file
             return @web url, options
 
+    belkworks: (repo, options) =>
+        @github 'belkworks', repo, options
+
     _makeDirectories: =>
         unless isfolder 'neon'
             makefolder 'neon'
