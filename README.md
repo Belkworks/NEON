@@ -70,15 +70,17 @@ package = NEON:web('http://path.to/the/file.lua')
 
 ## Official Modules
 
-- [flat](https://github.com/Belkworks/flat) - a simple flatfile database
 - [quick](https://github.com/Belkworks/quick) - an underscore port
+- [broom](https://github.com/Belkworks/broom) - a reactive task runner, inspired by Nevermore's `maid` class.
+- [nest](https://github.com/Belkworks/nset) - an event emitter
+
+- [flat](https://github.com/Belkworks/flat) - a simple flatfile database
 - [chance](https://github.com/Belkworks/chance) - a random generator
 - [logfile](https://github.com/Belkworks/logfile) - a log writer
 - [synlog](https://github.com/Belkworks/synlog) - a visual logger compatible with logfile
 - [chalk](https://github.com/Belkworks/chalk) - a terminal styler
 - [future](https://github.com/Belkworks/future) - an alternative to promises
 - [hold](https://github.com/Belkworks/hold) - a caching mechanism
-- [broom](https://github.com/Belkworks/broom) - a reactive task runner, inspired by Nevermore's `maid` class.
 - [machine](https://github.com/Belkworks/machine) - a robust state machine
 - [clerk](https://github.com/Belkworks/clerk) - a state manager
 - [gate](https://github.com/Belkworks/gate) - a pausable event handler
