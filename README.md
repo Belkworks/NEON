@@ -72,7 +72,7 @@ package = NEON:web('http://path.to/the/file.lua')
 
 - [quick](https://github.com/Belkworks/quick) - an underscore port
 - [broom](https://github.com/Belkworks/broom) - a reactive task runner, inspired by Nevermore's `maid` class.
-- [nest](https://github.com/Belkworks/nset) - an event emitter
+- [nest](https://github.com/Belkworks/nest) - an event emitter
 - [flat](https://github.com/Belkworks/flat) - a simple flatfile database
 - [chance](https://github.com/Belkworks/chance) - a random generator
 - [logfile](https://github.com/Belkworks/logfile) - a log writer
